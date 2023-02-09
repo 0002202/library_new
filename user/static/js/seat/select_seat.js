@@ -130,8 +130,9 @@ function bindClickPostEvent(){
     })
 }
 function CancelEventModel(){
-    $("#Btn").click(function (){
+    $("#BtnConfirm").click(function (){
         $("#myModal").modal('hide');
+        console.log(1111);
         window.location.reload();
     })
 }

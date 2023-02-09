@@ -116,6 +116,10 @@ def seat_save(request):
     nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     OnlineUser.objects.filter(userSeat=seatId).update(userStatus=3, userTime=nowTime)
     Seat.objects.filter(seatId=seatId).update(seatStatus=3)
+    # 有必要存储用户已就坐
+    request.session['user_already'] = {
+        'is_already': True
+    }
     return JsonResponse({
         'status': True,
         'result': '签到成功！'

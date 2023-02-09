@@ -17,6 +17,21 @@ from user.utils.encrypt import md5
 
 def show_index(request):
     if request.method == 'GET':
+        try:
+            user_seatId = request.session.get('user_seat').get('seatId')
+            user_is_already = request.session.get('user_already').get('is_already')
+        except:
+            user_is_already = None
+        if user_is_already:
+            userName = User.objects.filter(userId=request.session.get('user_name').get('userId')).values('userName')[0]. \
+                get('userName')
+            title = '注销'
+            countdown = OnlineUser.objects.filter(userSeat=user_seatId).values('userTime')[0].get('userTime')
+            return render(request, 'user/sign_success.html', {
+                'countdown': countdown,
+                'userName': userName,
+                'title': title
+            })
         data = {}
         queryData = Information.objects.filter().order_by("-createTime")
         try:
@@ -72,15 +87,25 @@ def select_seat(request):
             # 判断用户是否已经预约座位，若用户已经预约则不对用户显示选作页面，显示签到页面
             user_is_order = request.session.get('user_seat').get('is_order')
             user_seatId = request.session.get('user_seat').get('seatId')
-
+            try:
+                user_is_already = request.session.get('user_already').get('is_already')
+            except:
+                user_is_already = None
             user_userTime = OnlineUser.objects.filter(userSeat=user_seatId).values('userTime')[0].get('userTime')
-            if user_is_order:
+            if user_is_order and not user_is_already:
                 # 返回签到页面
                 return render(request, 'user/sign_in.html', {
                     'countdown': user_userTime,
                     'seatId': user_seatId,
                     'userName': userName,
                     'title': title,
+                })
+            elif user_is_order and user_is_already:
+                countdown = OnlineUser.objects.filter(userSeat=user_seatId).values('userTime')[0].get('userTime')
+                return render(request, 'user/sign_success.html', {
+                    'countdown': countdown,
+                    'userName': userName,
+                    'title': title
                 })
         except:
             return render(request, 'seat/select_seat.html', {

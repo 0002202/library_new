@@ -11,6 +11,7 @@ div{
 }
 
 .seat{
+    cursor: pointer;
     user-select: none;
     display: inline;
     width: 40px;
