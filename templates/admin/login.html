@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <script src="{% static 'plugins/jquery/dist/jquery.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login/login.css' %}">
+    <script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/admin/login.js' %}"></script>
+
+<body>
+    <div class="page-header">
+        <h1><img src="{% static 'img/logo.png' %}"><small>&ensp;&ensp;&ensp;图书馆座位预约系统</small></h1>
+    </div>
+    <div class="container right-panel-active">
+
+        <!-- Sign In -->
+        <div class="container__form container--signin">
+          <form class="form" id="loginForm"  method="post" novalidate>
+              {% csrf_token %}
+            <h2 class="form__title">管 理 员 登 录</h2>
+
+              {{ form.name }}
+              <span style="color: red; float: left">{{ form.name.errors.0 }}</span>
+              <div style="height: 20px;"></div>
+              {{ form.password }}
+              <span style="color: red; float: left">{{ form.password.errors.0 }}</span>
+              <button class="btn" type="submit" id="PostValues">登录</button>
+          </form>
+        </div>
+    
+        <!-- Overlay -->
+        <div class="container__overlay">
+          <div class="overlay">
+          </div>
+        </div>
+      </div>
+
+    <script src="{% static 'js/admin/login.js' %}"></script>
+</body>
+
+</html>

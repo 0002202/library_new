@@ -1,0 +1,59 @@
+{% extends 'template_user.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/user/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1>图书馆座位预约系统</h1>
+            <p>期待与您的第一次见面</p>
+            <p><a class="btn btn-primary btn-lg" href="{% url 'show_seat' %}" role="button">快速使用</a></p>
+        </div>
+        <div class="col-md-6">
+            <div class="row-head">
+                <h4>系 统 简 介 <span class="label label-default">New</span></h4>
+            </div>
+            <div class="row-head-title">
+                <p class="text">
+                    学生用户通过注册账号进行登录该系统；若登录不成功，返回登录重新登录；登录成功后进行查询座位，选择好座位后提交查询；若查询到有该类型座位时，进行选座。系统返回选座结果以及预选座位编号，并将该座位状态置为被预订；若选座失败则返回重新选座；预选成功后，系统自动开始计时20分钟，若在20分钟内到达入馆签到，则预选的座位状态变为非空。若未在时间内签到，则将该座位状态重新置为可预约，系统自动告知该用户需要重新选座，超过三次未按时签到，该用户将停用该系统一周。
+                </p>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <div class="row-head">
+                <h4>公 告 管 理 <span class="label label-default">New</span></h4>
+            </div>
+            <div class="row-body">
+                {% for i in queryData %}
+                    <span uid={{ i.id }} class="list-group-item"><span class="badge">{{ i.createTime }}</span><a>{{ i.title }}</a></span>
+                       <div class="modal fade" id={{ i.id }} tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myShowModalLabel" style="color:black;">{{ i.title }}</h4>
+                              </div>
+                              <div class="modal-body" >
+                                <!--公告内容-->
+                                  <pre id="myShowModalBody" class="text-wrap">{{ i.context }}</pre>
+                                  <i style="float: right" class="text-wrap">最后更新于：{{ i.createTime }}</i>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/user/index.js' %}"></script>
+{% endblock %}

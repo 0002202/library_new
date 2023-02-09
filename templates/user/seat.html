@@ -1,0 +1,57 @@
+{% extends 'template_user.html' %}
+{% load static %}
+{% block css %}
+    <link href="{% static 'css/user/seat.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+
+{#    <div class="row-column">#}
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="{% static 'img/自习室1.png' %}" alt="自习室">
+
+                    <div class="caption">
+                        <h3>自习区</h3>
+                        <b style="float: right;">当前剩余空位：<label>{{ studySeatNumber }}</label></b>
+                        <!-- <p>提供学生自主自习的区域</p> -->
+                        <p>
+                            <a href="{% url 'select_seat' %}" class="btn btn-primary" role="button">进入</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-4">
+                <div class="thumbnail">
+                    <img src="{% static 'img/阅读室.png' %}" alt="阅读区">
+
+                    <div class="caption">
+                        <h3>阅读区</h3>
+                        <b style="float: right;">当前剩余空位：<label>{{ standardSeatNumber }}</label></b>
+                        <!-- <p>提供学生正常阅读的区域</p> -->
+                        <p>
+                            <a href="#" class="btn btn-primary" role="button">进入</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-4">
+                <div class="thumbnail">
+                    <img src="{% static 'img/休闲室.png' %}" alt="休闲区">
+
+                    <div class="caption">
+                        <h3>休闲区</h3>
+                        <b style="float: right;">当前剩余空位：<label>{{ leisureSeatNumber }}</label></b>
+                        <!-- <p>提供学生放松休闲的区域</p> -->
+                        <p>
+                            <a href="#" class="btn btn-primary" role="button">进入</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+{#    </div>#}
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static '/js/user/seat.js' %}"></script>
+{% endblock %}

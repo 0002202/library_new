@@ -1,0 +1,147 @@
+{% extends 'template_admin.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/admin/seat.css' %}">
+{% endblock %}
+{% block content %}
+    <!-- 座位表单，对座位的增删改查 -->
+
+    <div class="container">
+        <!-- 需要按照座位类型和座位楼层进行分类 -->
+
+        <!-- 需要创建座位 -->
+        <button id="btnAdd" type="button" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            新建座位
+        </button>
+        <form class="navbar-form navbar-right" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="按照座位id进行搜索" name="searchSeatId" value="{{ searchSeatId }}">
+            </div>
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> 搜索</button>
+        </form>
+        <!-- 模态框 -->
+        <!--  需要加上：data-toggle="modal" data-target="#myModal" -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            新建座位
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="PostForm" method="post" novalidate>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">座位ID</label>
+                                <div class="col-sm-3">
+                                    {{ seat_add.seatId }}
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+                                <label for="inputSelect3" class="col-sm-2 control-label">隶属区域</label>
+                                <div class="col-sm-3">
+                                    {{ seat_add.seatType }}
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputSelect3" class="col-sm-2 control-label">所在楼层</label>
+                                <div class="col-sm-3">
+                                    {{ seat_add.seatFloor }}
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+                                <label for="inputSelect3" class="col-sm-2 control-label">拥有电源</label>
+                                <div class="col-sm-3">
+                                    {{ seat_add.seatPower }}
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputSelect3" class="col-sm-2 control-label">靠近走廊</label>
+                                <div class="col-sm-3">
+                                    {{ seat_add.seatCorridor }}
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+
+                                <label for="inputSelect3" class="col-sm-2 control-label">必须预约</label>
+                                 <div class="col-sm-3">
+                                    {{ seat_add.seatOrder }}
+                                     <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                 </div>
+                            </div>
+
+                        </form>
+                          <div class="modal-footer">
+                        <!-- 选择创建后，应该提交.form-horizontal表单的内容 -->
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            关闭
+                        </button>
+                        <button id="btnSave" type="submit" class="btn btn-primary">
+                            完成创建
+                        </button>
+                    </div>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        <table class="table table-primary table-striped table-hover table-bordered border-success">
+            <thead style="background-color:rgb(51, 122, 183)">
+                <tr>
+                    <td>座位ID</td>
+                    <td>所在区域</td>
+                    <td>所在楼层</td>
+                    <td>是否拥有电源</td>
+                    <td>是否靠近走廊</td>
+                    <td>是否必须预约</td>
+                    <td>编辑</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for i in seat_info %}
+                        <td class="seatID">{{ i.seatId }}</td>
+                        <td><span class="label label-primary" id="seatType">{{ i.get_seatType_display }}</span></td>
+                        <td class="floor">{{ i.get_seatFloor_display }}</td>
+                        <td class="power">{{ i.get_seatPower_display }}</td>
+                        <td class="corridor">{{ i.get_seatCorridor_display }}</td>
+                        <td class="order">{{ i.get_seatOrder_display }}</td>
+                        <td>
+                            <button uid="{{ i.seatId }}" type="button" class="btn btn-warning btn-edit" >修改</button>
+                            <button uid="{{ i.seatId }}" type="button" class="btn btn-danger btn-delete">删除</button>
+                        </td>
+                        </tr>
+                {% endfor %}
+
+
+            </tbody>
+        </table>
+    <nav aria-label="...">
+        <ul class="pagination">
+            {{ page_string }}<li><a>共：<b>{{ data_count }}</b>条</a></li>
+        </ul>
+    </nav>
+    </div>
+<!--警告框-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <h4>确认是否删除？</h4>
+                <p style="margin: 10px 0;">删除后，该座位将被删除</p>
+                <p style="text-align: right;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" id="ConfirmDelete">确认删除</button>
+                </p>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/admin/seat.js' %}"></script>
+{% endblock %}

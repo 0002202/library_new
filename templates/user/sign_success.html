@@ -1,0 +1,38 @@
+{% extends 'template_user.html' %}
+{% load static %}
+{% block css %}
+{#    <link href="{% static 'css/user/sign_in.css' %}" rel="stylesheet">#}
+{% endblock %}
+{% block content %}
+    <span id="countdown" style="display: none">{{ countdown }}</span>
+    <div class="container">
+    <div class="col-sm-5">
+        <h3>今日您已学习：</h3>
+
+        <div class="time-item">
+                <strong id="hour_show"></strong>时
+                <strong id="minute_show"></strong>分
+                <strong id="second_show"></strong>秒
+        </div>
+    </div>
+    <div class="col-sm-5">
+        <button class="btn btn-default btn-primary" id="leaveLibrary">离馆</button>
+    </div>
+    </div>
+    <div class="modal fade" id="leaveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <h4>确认是否离馆？</h4>
+                <p style="margin: 10px 0;">离馆后，座位将被释放</p>
+                <p style="text-align: right;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" id="ConfirmLeave">确认离馆</button>
+                </p>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/user/sign_success.js' %}"></script>
+{% endblock %}

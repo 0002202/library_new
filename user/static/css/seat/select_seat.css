@@ -1,0 +1,67 @@
+div{
+    white-space:nowrap;
+}
+.desk{
+    width: 60px;
+    height: 100px;
+    float: left;
+    border: 1px solid;
+    /*text-align: center;*/
+    /*margin-left: 50px;*/
+}
+
+.seat{
+    user-select: none;
+    display: inline;
+    width: 40px;
+    height: 35px;
+    float: left;
+    padding: 0;
+    margin: 6px 0 10px 1px;
+    border: 1px solid;
+}
+
+.seat-power{
+    border: 3px solid yellow;
+}
+.seat-click{
+    color: white;
+    background-color:#4CAF50;
+}
+.seat-disable{
+    pointer-events:none;
+}
+.seat-disable:hover{
+    cursor: not-allowed;
+}
+.seat-disable:focus {
+    color: #777777;
+    cursor: not-allowed;        /*鼠标改变样式*/
+    /*background-color: #eeeeee;*/
+    pointer-events:none;        /*禁止被点击*/
+}
+
+.seat-already{
+    color: white;
+    background-color: red;
+}
+.seat-order{
+    color: white;
+    background-color: #d58512;
+}
+.seat:hover{
+    color: white;
+    background-color:#4CAF50;
+}
+
+.aisle{
+    text-align: center;
+    padding: 9px 0 0 0;
+}
+
+.select-info{
+    text-align: center;
+}
+.seat-id{
+
+}

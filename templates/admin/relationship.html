@@ -1,0 +1,92 @@
+{% extends 'template_admin.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/admin/relationship.css' %}">
+{% endblock %}
+{% block content %}
+    <!-- 模态框（Modal） -->
+    <!--  需要加上类：data-toggle="modal" data-target="#myModal" -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改预约记录
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" id="PostForm">
+                        {% csrf_token %}
+                        <div class="form-group">
+
+                            <label for="inputText3" class="col-sm-2 control-label">用户ID</label>
+                            <div class="col-sm-3">
+                                {{ user_info_add.userId }}
+                            </div>
+                            <label for="inputText3" class="col-sm-3 control-label">对应座位ID</label>
+                            <div class="col-sm-3">
+                                {{ user_info_add.userSeat }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSelect3" class="col-sm-2 control-label">用户状态</label>
+                            <div class="col-sm-3">
+                                {{ user_info_add.userStatus }}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button id="postData" type="button" class="btn btn-primary">完成</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!-- 座位预约关系信息，展示座位对应的人员信息 -->
+    <div class="container">
+        <form class="navbar-form navbar-right">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="按照用户id进行搜索" name="searchUserId" value="{{ searchUserId }}">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+        <table class="table table-primary table-striped table-hover table-bordered border-success">
+            <thead style="background-color:rgb(51, 122, 183)">
+                <tr>
+                    <td>用户ID</td>
+                    <td>对应座位ID</td>
+                    <td>用户状态</td>
+                    <td>更新时间</td>
+                    <td>编辑</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {% for i in userData %}
+                        <td class="userId">{{ i.userId }}</td>
+                        <td id="userSeatId">{{ i.userSeat }}</td>
+                        <td><span class="label label-primary" id="userType">{{ i.get_userStatus_display }}</span></td>
+                        <td>{{ i.userTime }}</td>
+
+                    <td>
+                        <button uid="{{ i.userId }}" type="button" class="btn btn-warning btn-edit">修改</button>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+     <nav aria-label="...">
+        <ul class="pagination">
+            {{ page_string }}<li><a>共：<b>{{ data_count }}</b>条</a></li>
+        </ul>
+    </nav>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/admin/relationship.js' %}"></script>
+{% endblock %}

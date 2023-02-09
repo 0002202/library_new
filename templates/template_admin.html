@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>library_admin</title>
+    <script src="{% static 'plugins/jquery/dist/jquery.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <link href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+    <div class="page-header">
+        <h1><img src="{% static 'img/logo.png' %} "><small>&ensp;&ensp;&ensp;图书馆座位预约系统</small></h1>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'show_admin_index' %}">Nbdj</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'show_admin_index' %}">人员管理<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{% url 'show_admin_seat' %}">座位管理</a></li>
+                    <li><a href="{% url 'show_admin_information' %}">公告管理</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'show_admin_relationship' %}">预约关系</a></li>
+
+                    <!--需要删除管理员的session-->
+                    <li><a href="{% url 'show_admin_logout' %}">注销</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% block content %} {% endblock %}
+{% block js %} {% endblock %}
+</body>
+</html>

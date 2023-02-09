@@ -1,0 +1,9 @@
+{% extends 'template_user.html' %}
+{% load static %}
+{% block css %}
+{#    <link href="{% static 'css/user/sign_in.css' %}" rel="stylesheet">#}
+{% endblock %}
+{% block content %}
+    {{ userId }}
+    {{ seatId }}
+{% endblock %}

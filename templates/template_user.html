@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>library</title>
+    <script src="{% static 'plugins/jquery/dist/jquery.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <link href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    {% block css %} {% endblock %}
+</head>
+
+<body>
+    <div class="page-header">
+        <h1><img src="{% static 'img/logo.png' %} "><small>&ensp;&ensp;&ensp;图书馆座位预约系统</small></h1>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'show_index' %}">Nbdj</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'show_index' %}">我的图书馆 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="{% url 'show_seat' %}">在线选座</a></li>
+                    <li><a href="{% url 'show_seat' %}">预约选座</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'show_information' %}">信息中心</a></li>
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ userName }}<span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">选座历史</a></li>
+                        <li><a href="#">个人资料</a></li>
+
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{% url 'show_logout' %}">{{ title }}</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% block content %} {% endblock %}
+{% block js %} {% endblock %}
+</body>
+</html>

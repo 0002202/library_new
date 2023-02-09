@@ -1,0 +1,37 @@
+{% extends 'template_admin.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/admin/index.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+{#    <div class="row-column">#}
+        <div class="col-sm-6 col-md-6">
+            <div class="thumbnail">
+                <!-- 需要点击进入 -->
+                <div class="caption" onclick="window.location.href='{% url 'show_admin_relationship' %}' ">
+                    <h3>在线用户</h3>
+                    <!-- 能够进行对用户的增删改查 -->
+                    <!-- <label></label> -->
+                    <p>当前登录系统用户</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="thumbnail">
+
+                <div class="caption" onclick="window.location.href='{% url 'show_admin_black' %}' ">
+                    <h3>黑名单</h3>
+                    <!-- 对黑白名单的管理 -->
+                    <!-- <label></label> -->
+                    <p>处理系统自动拉黑的用户</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    </div>#}
+
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/admin/index.js' %}"></script>
+{% endblock %}

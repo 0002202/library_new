@@ -1,0 +1,169 @@
+{% extends 'template_admin.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/admin/black.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <button id="blackUserBtn" type="button" class="btn btn-success" style="margin: 0 0 16px 0;">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+            拉黑用户
+        </button>
+        <!-- 模态框1（Modal）-->
+        <!--  需要加上类：data-toggle="modal" data-target="#myModal" -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            拉黑用户
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="DataPostForm">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">用户ID</label>
+                                <div class="col-sm-10">
+                                    {{ add_info.userId }}
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">拉黑原因</label>
+                                <div class="col-sm-10">
+                                    {{ add_info.blackCause }}
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">创建时间</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="createTime" disabled="disabled"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">解除时间</label>
+                                <div class="col-sm-10">
+                                    {{ add_info.cancelTime }}
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <small><b>解除时间</b>表示用户退出黑名单的时间</small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary btn-save">
+                            完成
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        <!-- 模态框2（Modal） -->
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            修改时间
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="prolongTimeForm">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">用户ID</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id="userId" disabled="disabled"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">创建时间</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="createTime1" disabled="disabled"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">解除时间</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="cancelTime" disabled="disabled"/>
+                                    <span class="error-msg" style="color:red;">{{ form_errors.errors.0 }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputText3" class="col-sm-2 control-label">修改时间</label>
+                                <div class="col-sm-10">
+                                    {{ add_info_update.cancelTime }}
+                                    <span style="color:red;" id="prolongTimeSpan"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" id="prolongTimeBtn">确定
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+        <form class="navbar-form navbar-right" method="get">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="按照用户id进行搜索" name="searchUserId" value="{{ searchUserId }}">
+            </div>
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> 搜索</button>
+        </form>
+        <!-- 能够对黑名单中得用户进行管理 -->
+        <table class="table table-primary table-striped table-hover table-bordered border-success">
+            <thead style="background-color:rgb(51, 122, 183)">
+                <tr>
+                    <td>用户ID</td>
+                    <td>拉黑原因</td>
+                    <td>创建时间</td>
+                    <td>解除时间</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in black_user %}
+                <tr>
+                    <td>{{ i.userId }}</td>
+                    <td>{{ i.blackCause }}</td>
+                    <td>{{ i.createTime }}</td>
+                    <td>{{ i.cancelTime }}</td>
+                    <td>
+                        <button uid = {{ i.userId }} type="button" class="btn btn-info btn-del"><span class="glyphicon glyphicon-minus-sign"></span>&ensp;移除</button>
+                        <button uid = {{ i.userId }} type="button" class="btn btn-danger prolongTimeBtn">修改时间</button>
+                    </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+        <nav aria-label="...">
+            <ul class="pagination">
+                {{ page_string }}<li><a>共：<b>{{ data_count }}</b>条</a></li>
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/admin/black.js' %}"></script>
+{% endblock %}

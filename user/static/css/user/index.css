@@ -1,0 +1,37 @@
+body{
+    height: 1000px;
+}
+.col-md-6,
+.col-md-4{
+    padding: 0;
+    height: 100%;
+    box-shadow: inset;
+    border: 1px solid rgb(51, 122, 183);
+    border-radius: 5px;
+    /* background-color: rgb(238, 238, 238); */
+}
+.row-head{
+    height: 50px;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    background-color:rgb(51, 122, 183)
+}
+.text{
+    text-indent:30px;
+    padding: 10px;
+}
+h4{
+    padding: 15px 10px;
+    margin: 0;
+    color: white;
+}
+.lable-date{
+    float: right;
+}
+span.badge{
+    background-color: white;
+    color:black;
+}
+span.badge:hover{
+    background-color: rgb(238, 238, 238);
+}
