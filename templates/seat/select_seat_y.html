@@ -1,0 +1,1120 @@
+{% extends 'template_user.html' %}
+{% load static %}
+{% block css %}
+    <link href="{% static 'css/seat/select_seat.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+{#    <div class="container">#}
+    <div class="col-sm-1">
+            <div class="list-group" style="text-align: center">
+                <a class="list-group-item disabled" id="seatType">
+                    阅读区
+                </a>
+                <a class="list-group-item floor active" id="1th" uid="1">一楼</a>
+                <a class="list-group-item floor" id="2th" uid="2">二楼</a>
+                <a class="list-group-item floor" id="3th" uid="3">三楼</a>
+                <a class="list-group-item floor" id="4th" uid="4">四楼</a>
+                <a class="list-group-item floor" id="5th" uid="5">五楼</a>
+            </div>
+
+
+    </div>
+
+    <div class="col-sm-11">
+        <div class="seatInfo 1th">
+    <div class="col-sm-10">
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1001"><p class="seatId"></p></div>
+                <div class="seat" id="y1002"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1003"><p class="seatId"></p></div>
+                <div class="seat" id="y1004"><p class="seatId"></p></div>
+            </div>
+        </div>
+         <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1005"><p class="seatId"></p></div>
+                <div class="seat" id="y1006"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1007"><p class="seatId"></p></div>
+                <div class="seat" id="y1008"><p class="seatId"></p></div>
+            </div>
+        </div>
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1009"><p class="seatId"></p></div>
+                <div class="seat" id="y1010"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1011"><p class="seatId"></p></div>
+                <div class="seat" id="y1012"><p class="seatId"></p></div>
+            </div>
+        </div>
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1013"><p class="seatId"></p></div>
+                <div class="seat" id="y1014"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1015"><p class="seatId"></p></div>
+                <div class="seat" id="y1016"><p class="seatId"></p></div>
+            </div>
+        </div>
+    <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1017"><p class="seatId"></p></div>
+                <div class="seat" id="y1018"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1019"><p class="seatId"></p></div>
+                <div class="seat" id="y1020"><p class="seatId"></p></div>
+            </div>
+        </div>
+            <!--过道-->
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1021"><p class="seatId"></p></div>
+                <div class="seat" id="y1022"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1023"><p class="seatId"></p></div>
+                <div class="seat" id="y1024"><p class="seatId"></p></div>
+            </div>
+        </div>
+    <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle"> 过道</p></div>
+
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1025"><p class="seatId"></p></div>
+                <div class="seat" id="y1026"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1027"><p class="seatId"></p></div>
+                <div class="seat" id="y1028"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1029"><p class="seatId"></p></div>
+                <div class="seat" id="y1030"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1031"><p class="seatId"></p></div>
+                <div class="seat" id="y1032"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1033"><p class="seatId"></p></div>
+                <div class="seat" id="y1034"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1035"><p class="seatId"></p></div>
+                <div class="seat" id="y1036"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1037"><p class="seatId"></p></div>
+                <div class="seat" id="y1038"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1039"><p class="seatId"></p></div>
+                <div class="seat" id="y1040"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1041"><p class="seatId"></p></div>
+                <div class="seat" id="y1042"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1043"><p class="seatId"></p></div>
+                <div class="seat" id="y1044"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1045"><p class="seatId"></p></div>
+                <div class="seat" id="y1046"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1047"><p class="seatId"></p></div>
+                <div class="seat" id="y1048"><p class="seatId"></p></div>
+            </div>
+        </div>
+            <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle">过 道</p></div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1049"><p class="seatId"></p></div>
+                <div class="seat" id="y1050"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1051"><p class="seatId"></p></div>
+                <div class="seat" id="y1052"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1053"><p class="seatId"></p></div>
+                <div class="seat" id="y1054"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1055"><p class="seatId"></p></div>
+                <div class="seat" id="y1056"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1057"><p class="seatId"></p></div>
+                <div class="seat" id="y1058"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1059"><p class="seatId"></p></div>
+                <div class="seat" id="y1060"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1061"><p class="seatId"></p></div>
+                <div class="seat" id="y1062"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1063"><p class="seatId"></p></div>
+                <div class="seat" id="y1064"><p class="seatId"></p></div>
+            </div>
+        </div>
+       <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1065"><p class="seatId"></p></div>
+                <div class="seat" id="y1066"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1067"><p class="seatId"></p></div>
+                <div class="seat" id="y1068"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y1069"><p class="seatId"></p></div>
+                <div class="seat" id="y1070"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y1071"><p class="seatId"></p></div>
+                <div class="seat" id="y1072"><p class="seatId"></p></div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+        <div class="seatInfo 2th" style="display: none">
+            <div class="col-sm-10">
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2001"><p class="seatId"></p></div>
+                <div class="seat" id="y2002"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2003"><p class="seatId"></p></div>
+                <div class="seat" id="y2004"><p class="seatId"></p></div>
+            </div>
+        </div>
+         <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2005"><p class="seatId"></p></div>
+                <div class="seat" id="y2006"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2007"><p class="seatId"></p></div>
+                <div class="seat" id="y2008"><p class="seatId"></p></div>
+            </div>
+        </div>
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2009"><p class="seatId"></p></div>
+                <div class="seat" id="y2010"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2011"><p class="seatId"></p></div>
+                <div class="seat" id="y2012"><p class="seatId"></p></div>
+            </div>
+        </div>
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2013"><p class="seatId"></p></div>
+                <div class="seat" id="y2014"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2015"><p class="seatId"></p></div>
+                <div class="seat" id="y2016"><p class="seatId"></p></div>
+            </div>
+        </div>
+    <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2017"><p class="seatId"></p></div>
+                <div class="seat" id="y2018"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2019"><p class="seatId"></p></div>
+                <div class="seat" id="y2020"><p class="seatId"></p></div>
+            </div>
+        </div>
+            <!--过道-->
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2021"><p class="seatId"></p></div>
+                <div class="seat" id="y2022"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2023"><p class="seatId"></p></div>
+                <div class="seat" id="y2024"><p class="seatId"></p></div>
+            </div>
+        </div>
+    <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle"> 过道</p></div>
+
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2025"><p class="seatId"></p></div>
+                <div class="seat" id="y2026"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2027"><p class="seatId"></p></div>
+                <div class="seat" id="y2028"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2029"><p class="seatId"></p></div>
+                <div class="seat" id="y2030"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2031"><p class="seatId"></p></div>
+                <div class="seat" id="y2032"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2033"><p class="seatId"></p></div>
+                <div class="seat" id="y2034"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2035"><p class="seatId"></p></div>
+                <div class="seat" id="y2036"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2037"><p class="seatId"></p></div>
+                <div class="seat" id="y2038"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2039"><p class="seatId"></p></div>
+                <div class="seat" id="y2040"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2041"><p class="seatId"></p></div>
+                <div class="seat" id="y2042"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2043"><p class="seatId"></p></div>
+                <div class="seat" id="y2044"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2045"><p class="seatId"></p></div>
+                <div class="seat" id="y2046"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2047"><p class="seatId"></p></div>
+                <div class="seat" id="y2048"><p class="seatId"></p></div>
+            </div>
+        </div>
+            <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle">过 道</p></div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2049"><p class="seatId"></p></div>
+                <div class="seat" id="y2050"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2051"><p class="seatId"></p></div>
+                <div class="seat" id="y2052"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2053"><p class="seatId"></p></div>
+                <div class="seat" id="y2054"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2055"><p class="seatId"></p></div>
+                <div class="seat" id="y2056"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2057"><p class="seatId"></p></div>
+                <div class="seat" id="y2058"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2059"><p class="seatId"></p></div>
+                <div class="seat" id="y2060"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2061"><p class="seatId"></p></div>
+                <div class="seat" id="y2062"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2063"><p class="seatId"></p></div>
+                <div class="seat" id="y2064"><p class="seatId"></p></div>
+            </div>
+        </div>
+       <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2065"><p class="seatId"></p></div>
+                <div class="seat" id="y2066"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2067"><p class="seatId"></p></div>
+                <div class="seat" id="y2068"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y2069"><p class="seatId"></p></div>
+                <div class="seat" id="y2070"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y2071"><p class="seatId"></p></div>
+                <div class="seat" id="y2072"><p class="seatId"></p></div>
+            </div>
+        </div>
+
+
+    </div>
+        </div>
+        <div class="seatInfo 3th" style="display: none">
+        <div class="col-sm-10">
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3001"><p class="seatId"></p></div>
+                    <div class="seat" id="y3002"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3003"><p class="seatId"></p></div>
+                    <div class="seat" id="y3004"><p class="seatId"></p></div>
+                </div>
+            </div>
+             <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3005"><p class="seatId"></p></div>
+                    <div class="seat" id="y3006"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3007"><p class="seatId"></p></div>
+                    <div class="seat" id="y3008"><p class="seatId"></p></div>
+                </div>
+            </div>
+         <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3009"><p class="seatId"></p></div>
+                    <div class="seat" id="y3010"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3011"><p class="seatId"></p></div>
+                    <div class="seat" id="y3012"><p class="seatId"></p></div>
+                </div>
+            </div>
+         <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3013"><p class="seatId"></p></div>
+                    <div class="seat" id="y3014"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3015"><p class="seatId"></p></div>
+                    <div class="seat" id="y3016"><p class="seatId"></p></div>
+                </div>
+            </div>
+        <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3017"><p class="seatId"></p></div>
+                    <div class="seat" id="y3018"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3019"><p class="seatId"></p></div>
+                    <div class="seat" id="y3020"><p class="seatId"></p></div>
+                </div>
+            </div>
+                <!--过道-->
+         <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3021"><p class="seatId"></p></div>
+                    <div class="seat" id="y3022"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3023"><p class="seatId"></p></div>
+                    <div class="seat" id="y3024"><p class="seatId"></p></div>
+                </div>
+            </div>
+        <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle"> 过道</p></div>
+
+         <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3025"><p class="seatId"></p></div>
+                    <div class="seat" id="y3026"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3027"><p class="seatId"></p></div>
+                    <div class="seat" id="y3028"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3029"><p class="seatId"></p></div>
+                    <div class="seat" id="y3030"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3031"><p class="seatId"></p></div>
+                    <div class="seat" id="y3032"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3033"><p class="seatId"></p></div>
+                    <div class="seat" id="y3034"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3035"><p class="seatId"></p></div>
+                    <div class="seat" id="y3036"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3037"><p class="seatId"></p></div>
+                    <div class="seat" id="y3038"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3039"><p class="seatId"></p></div>
+                    <div class="seat" id="y3040"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3041"><p class="seatId"></p></div>
+                    <div class="seat" id="y3042"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3043"><p class="seatId"></p></div>
+                    <div class="seat" id="y3044"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3045"><p class="seatId"></p></div>
+                    <div class="seat" id="y3046"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3047"><p class="seatId"></p></div>
+                    <div class="seat" id="y3048"><p class="seatId"></p></div>
+                </div>
+            </div>
+                <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle">过 道</p></div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3049"><p class="seatId"></p></div>
+                    <div class="seat" id="y3050"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3051"><p class="seatId"></p></div>
+                    <div class="seat" id="y3052"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3053"><p class="seatId"></p></div>
+                    <div class="seat" id="y3054"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3055"><p class="seatId"></p></div>
+                    <div class="seat" id="y3056"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3057"><p class="seatId"></p></div>
+                    <div class="seat" id="y3058"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3059"><p class="seatId"></p></div>
+                    <div class="seat" id="y3060"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3061"><p class="seatId"></p></div>
+                    <div class="seat" id="y3062"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3063"><p class="seatId"></p></div>
+                    <div class="seat" id="y3064"><p class="seatId"></p></div>
+                </div>
+            </div>
+           <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3065"><p class="seatId"></p></div>
+                    <div class="seat" id="y3066"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3067"><p class="seatId"></p></div>
+                    <div class="seat" id="y3068"><p class="seatId"></p></div>
+                </div>
+            </div>
+            <div class="col-sm-2" style=" padding: 0;">
+                <div style="height: 100px; width: 50px; float: left;">
+                    <div class="seat" id="y3069"><p class="seatId"></p></div>
+                    <div class="seat" id="y3070"><p class="seatId"></p></div>
+                </div>
+                    <div class="desk"></div>
+                <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                    <div class="seat" id="y3071"><p class="seatId"></p></div>
+                    <div class="seat" id="y3072"><p class="seatId"></p></div>
+                </div>
+            </div>
+
+
+        </div>
+        </div>
+        <div class="seatInfo 4th" style="display: none">
+        <div class="col-sm-10">
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4001"><p class="seatId"></p></div>
+                <div class="seat" id="y4002"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4003"><p class="seatId"></p></div>
+                <div class="seat" id="y4004"><p class="seatId"></p></div>
+            </div>
+        </div>
+         <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4005"><p class="seatId"></p></div>
+                <div class="seat" id="y4006"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4007"><p class="seatId"></p></div>
+                <div class="seat" id="y4008"><p class="seatId"></p></div>
+            </div>
+        </div>
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4009"><p class="seatId"></p></div>
+                <div class="seat" id="y4010"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4011"><p class="seatId"></p></div>
+                <div class="seat" id="y4012"><p class="seatId"></p></div>
+            </div>
+        </div>
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4013"><p class="seatId"></p></div>
+                <div class="seat" id="y4014"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4015"><p class="seatId"></p></div>
+                <div class="seat" id="y4016"><p class="seatId"></p></div>
+            </div>
+        </div>
+    <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="z4017"><p class="seatId"></p></div>
+                <div class="seat" id="z4018"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="z4019"><p class="seatId"></p></div>
+                <div class="seat" id="z4020"><p class="seatId"></p></div>
+            </div>
+        </div>
+            <!--过道-->
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4021"><p class="seatId"></p></div>
+                <div class="seat" id="y4022"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4023"><p class="seatId"></p></div>
+                <div class="seat" id="y4024"><p class="seatId"></p></div>
+            </div>
+        </div>
+    <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle"> 过道</p></div>
+
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4025"><p class="seatId"></p></div>
+                <div class="seat" id="y4026"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4027"><p class="seatId"></p></div>
+                <div class="seat" id="y4028"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4029"><p class="seatId"></p></div>
+                <div class="seat" id="y4030"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4031"><p class="seatId"></p></div>
+                <div class="seat" id="y4032"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4033"><p class="seatId"></p></div>
+                <div class="seat" id="y4034"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4035"><p class="seatId"></p></div>
+                <div class="seat" id="y4036"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4037"><p class="seatId"></p></div>
+                <div class="seat" id="y4038"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4039"><p class="seatId"></p></div>
+                <div class="seat" id="y4040"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4041"><p class="seatId"></p></div>
+                <div class="seat" id="y4042"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4043"><p class="seatId"></p></div>
+                <div class="seat" id="y4044"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4045"><p class="seatId"></p></div>
+                <div class="seat" id="y4046"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4047"><p class="seatId"></p></div>
+                <div class="seat" id="y4048"><p class="seatId"></p></div>
+            </div>
+        </div>
+            <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle">过 道</p></div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4049"><p class="seatId"></p></div>
+                <div class="seat" id="y4050"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4051"><p class="seatId"></p></div>
+                <div class="seat" id="y4052"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4053"><p class="seatId"></p></div>
+                <div class="seat" id="y4054"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4055"><p class="seatId"></p></div>
+                <div class="seat" id="y4056"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4057"><p class="seatId"></p></div>
+                <div class="seat" id="y4058"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4059"><p class="seatId"></p></div>
+                <div class="seat" id="y4060"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4061"><p class="seatId"></p></div>
+                <div class="seat" id="y4062"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4063"><p class="seatId"></p></div>
+                <div class="seat" id="y4064"><p class="seatId"></p></div>
+            </div>
+        </div>
+       <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4065"><p class="seatId"></p></div>
+                <div class="seat" id="y4066"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4067"><p class="seatId"></p></div>
+                <div class="seat" id="y4068"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y4069"><p class="seatId"></p></div>
+                <div class="seat" id="y4070"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y4071"><p class="seatId"></p></div>
+                <div class="seat" id="y4072"><p class="seatId"></p></div>
+            </div>
+        </div>
+
+
+    </div>
+        </div>
+        <div class="seatInfo 5th" style="display: none">
+        <div class="col-sm-10">
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5001"><p class="seatId"></p></div>
+                <div class="seat" id="y5002"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5003"><p class="seatId"></p></div>
+                <div class="seat" id="y5004"><p class="seatId"></p></div>
+            </div>
+        </div>
+         <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5005"><p class="seatId"></p></div>
+                <div class="seat" id="y5006"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5007"><p class="seatId"></p></div>
+                <div class="seat" id="y5008"><p class="seatId"></p></div>
+            </div>
+        </div>
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5009"><p class="seatId"></p></div>
+                <div class="seat" id="y5010"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5011"><p class="seatId"></p></div>
+                <div class="seat" id="y5012"><p class="seatId"></p></div>
+            </div>
+        </div>
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5013"><p class="seatId"></p></div>
+                <div class="seat" id="y5014"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5015"><p class="seatId"></p></div>
+                <div class="seat" id="y5016"><p class="seatId"></p></div>
+            </div>
+        </div>
+    <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5017"><p class="seatId"></p></div>
+                <div class="seat" id="y5018"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5019"><p class="seatId"></p></div>
+                <div class="seat" id="y5020"><p class="seatId"></p></div>
+            </div>
+        </div>
+            <!--过道-->
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5021"><p class="seatId"></p></div>
+                <div class="seat" id="y5022"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5023"><p class="seatId"></p></div>
+                <div class="seat" id="y5024"><p class="seatId"></p></div>
+            </div>
+        </div>
+    <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle"> 过道</p></div>
+
+     <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5025"><p class="seatId"></p></div>
+                <div class="seat" id="y5026"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5027"><p class="seatId"></p></div>
+                <div class="seat" id="y5028"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5029"><p class="seatId"></p></div>
+                <div class="seat" id="y5030"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5031"><p class="seatId"></p></div>
+                <div class="seat" id="y5032"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5033"><p class="seatId"></p></div>
+                <div class="seat" id="y5034"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5035"><p class="seatId"></p></div>
+                <div class="seat" id="y5036"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5037"><p class="seatId"></p></div>
+                <div class="seat" id="y5038"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5039"><p class="seatId"></p></div>
+                <div class="seat" id="y5040"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5041"><p class="seatId"></p></div>
+                <div class="seat" id="y5042"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5043"><p class="seatId"></p></div>
+                <div class="seat" id="y5044"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5045"><p class="seatId"></p></div>
+                <div class="seat" id="y5046"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5047"><p class="seatId"></p></div>
+                <div class="seat" id="y5048"><p class="seatId"></p></div>
+            </div>
+        </div>
+            <div class="col-sm-12" style="height: 40px; border: #1b6d85 dashed 1px"><p class="aisle">过 道</p></div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5049"><p class="seatId"></p></div>
+                <div class="seat" id="y5050"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5051"><p class="seatId"></p></div>
+                <div class="seat" id="y5052"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5053"><p class="seatId"></p></div>
+                <div class="seat" id="y5054"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5055"><p class="seatId"></p></div>
+                <div class="seat" id="y5056"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5057"><p class="seatId"></p></div>
+                <div class="seat" id="y5058"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5059"><p class="seatId"></p></div>
+                <div class="seat" id="y5060"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5061"><p class="seatId"></p></div>
+                <div class="seat" id="y5062"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5063"><p class="seatId"></p></div>
+                <div class="seat" id="y5064"><p class="seatId"></p></div>
+            </div>
+        </div>
+       <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5065"><p class="seatId"></p></div>
+                <div class="seat" id="y5066"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5067"><p class="seatId"></p></div>
+                <div class="seat" id="y5068"><p class="seatId"></p></div>
+            </div>
+        </div>
+        <div class="col-sm-2" style=" padding: 0;">
+            <div style="height: 100px; width: 50px; float: left;">
+                <div class="seat" id="y5069"><p class="seatId"></p></div>
+                <div class="seat" id="y5070"><p class="seatId"></p></div>
+            </div>
+                <div class="desk"></div>
+            <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
+                <div class="seat" id="y5071"><p class="seatId"></p></div>
+                <div class="seat" id="y5072"><p class="seatId"></p></div>
+            </div>
+        </div>
+
+
+    </div>
+        </div>
+    <div class="col-sm-2" style=" height: 50px; padding: 0">
+
+        <div class="seat seat-power seat-disable" style="margin: 10px 10px 10px 20px"></div>
+{#        被人预约#}
+        <div class="seat seat-order seat-disable" style="margin: 10px;"></div>
+{#        已就坐#}
+        <div class="seat seat-already seat-disable" style="margin: 10px;"></div>
+
+    </div>
+     <div class="col-sm-2">&ensp;<i>电源</i> &ensp;&ensp;  <i>被人预约</i> &ensp;  <i>已就坐</i></div>
+
+    </div>
+
+    <div class="col-sm-12">
+    <div class="select" style="text-align: center">
+        <div class="select-info">
+            <h3>您选择的座位编号为：<span id="seat-id"></span></h3>
+            <button class="btn btn-default btn-primary" id="seatPostData">确定选座</button>
+        </div>
+
+
+    </div>
+    </div>
+    <!--模态框展示所选的座位数据-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            所选座位信息
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="alert alert-success" role="alert"><b>预约成功！</b>请在规定时间内完成签到</div>
+                        </div>
+                         <div class="col-sm-4">
+                             <h3>您已预约座位：<i class="seatId-order"></i></h3>
+{#                             <button class="btn btn-default btn-primary" id="seatPostData">确定签到</button>#}
+{#                             <button class="btn btn-default btn-danger" id="seatCancelData">取消预约</button>#}
+                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="BtnConfirm">确定
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/seat/select_seat.js' %}"></script>
+{% endblock %}

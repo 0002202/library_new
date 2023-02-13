@@ -22,7 +22,7 @@ function FirstDataGet() {
             'floor': FLOOR_ID,
         },
         success: function (res){
-            // console.log(res.result[0]);
+            console.log(res.result[0]);
 
                 for(let i = 0; i < res.result.length; i++){
                     bindGenerateSeat(res.result[i]);     // 填写座位数据并生成座位
@@ -121,7 +121,7 @@ function bindClickPostEvent(){
                     // 填充数据
                     $("#seat-order").attr('uid', res.seatId);
                     $('.seatId-order').text(res.seatId);
-                    $("#countdown").text(res.countdown);
+                    // $("#countdown").text(res.countdown);
                     $("#myModal").modal('show');
                 }
             }
@@ -132,7 +132,6 @@ function bindClickPostEvent(){
 function CancelEventModel(){
     $("#BtnConfirm").click(function (){
         $("#myModal").modal('hide');
-        console.log(1111);
         window.location.reload();
     })
 }

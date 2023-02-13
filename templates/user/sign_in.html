@@ -5,22 +5,67 @@
 {% endblock %}
 {% block content %}
     <div class="container">
-        <div class="col-sm-2" style="padding: 0; margin: 0;">
-            <h3 style="width: 240px;position:relative;">您已预约座位：</h3>
+        <div class="row">
+            <div class="time-item alert alert-danger col-sm-3 col-xs-6">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                <p>距离签到结束还剩
+                    <b id="minutes"></b>分
+                    <b id="seconds"></b>秒
+                </p>
+
+            </div>
+            <div class="col-sm-2 col-xs-4" style="padding: 0; margin: 0;">
+                <h3 style="position:relative;">您已预约座位：</h3>
+            </div>
+            <div class="col-xs-1 ">
+                    <div class="seat seat-order" id="{{ seatId }}"><p class="seatId">{{ seatId }}</p></div>
+                </div>
         </div>
-        <div class="seat seat-order" id="{{ seatId }}"><p class="seatId">{{ seatId }}</p></div>
-        <div class="col-sm-3">
-            <h3 style="width: 150px;position:relative;">请在规定时间内完成签到</h3>
-            <button class="btn btn-default btn-primary" id="seatPostData">确定签到</button>
-            <button class="btn btn-default btn-danger" id="seatCancelData">取消预约</button>
+        <div class="col-sm-9"></div>
+            <div class="row">
+                <div class="col-sm-4" style="padding: 0; margin: 0;">
+                    <h3 style="position:relative;">请在规定时间内完成签到</h3>
+
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-sm-11" style="text-align: center">
+                <button class="btn btn-default btn-primary" id="seatPostData">确定签到</button>
+                <div class="col-sm-1">&ensp;</div>
+                <button class="btn btn-default btn-danger" id="seatCancelData">取消预约</button>
+            </div>
         </div>
             <span id="countdown" style="display: none">{{ countdown }}</span>
-            <div class="time-item">
-                <strong id="hour_show"></strong>时
-                <strong id="minute_show"></strong>分
-                <strong id="second_show"></strong>秒
-            </div>
+
     </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            您已超时
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="alert alert-danger" role="alert"><b>您已超时！</b>您预约的座位将被释放，并将扣除您的信誉积分</div>
+                        </div>
+                         <div class="col-sm-6">
+                             <p>若您未按时签到，则系统将自动扣除一分</p>
+                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="BtnConfirm">确定
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
 {% endblock %}

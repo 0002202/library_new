@@ -1,5 +1,5 @@
 import datetime
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
@@ -13,7 +13,7 @@ from seat.models import Seat
 def seat_info(request):
     seatType = request.GET.get('seatType')
     seatFloor = request.GET.get('floor')
-    if '自习室' in seatType:
+    if '自习区' in seatType:
         seatType_num = 1
     elif '阅读区' in seatType:
         seatType_num = 2
@@ -52,29 +52,31 @@ def seat_lock(request):
 @csrf_exempt
 def seat_status_update(request):
     """座位状态更新"""
-    seatId = request.POST.get('seatId')
-    table_seatStatus = Seat.objects.filter(seatId=seatId).values('seatStatus')[0].get('seatStatus')
-    if table_seatStatus == 1:
-        # 获取用户数据
-        loginUserId = request.session.get('user_name').get('userId')
-        nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    if request.method == 'POST':
+        seatId = request.POST.get('seatId')
+        table_seatStatus = Seat.objects.filter(seatId=seatId).values('seatStatus')[0].get('seatStatus')
+        if table_seatStatus == 1:
+            # 获取用户数据
+            loginUserId = request.session.get('user_name').get('userId')
+            nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        # 修改数据库中信息
-        Seat.objects.filter(seatId=seatId).update(seatStatus=2)  # 座位状态改为被预约,2为被预约，并将数据更新
-        OnlineUser.objects.filter(userId=loginUserId).update(userSeat=seatId, userTime=nowTime, userStatus=2)
+            # 修改数据库中信息
+            Seat.objects.filter(seatId=seatId).update(seatStatus=2)  # 座位状态改为被预约,2为被预约，并将数据更新
+            OnlineUser.objects.filter(userId=loginUserId).update(userSeat=seatId, userTime=nowTime, userStatus=2)
 
-        # 记录用户session，防止用户再次选择
-        request.session['user_seat'] = {
-            'seatId': seatId,
-            'is_order': True
-        }
-        return JsonResponse({
-            'status': True,
-            'countdown': nowTime,
-            'seatId': seatId,
-        })
-    else:
-        return redirect(request, '/getSeat/select_seat/')
+            # 记录用户session，防止用户再次选择
+            request.session['user_seat'] = {
+                'seatId': seatId,
+                'is_order': True
+            }
+            return JsonResponse({
+                'status': True,
+                # 'countdown': nowTime,
+                'seatId': seatId,
+            })
+        else:
+            return redirect(request, '/getSeat/select_seat/')
+    return HttpResponse("404")
 
 
 def seat_cancel(request):
@@ -102,9 +104,10 @@ def seat_cancel(request):
     })
 
 
+@csrf_exempt
 def seat_save(request):
     """确认签到"""
-    seatId = request.GET.get('seatId')
+    seatId = request.POST.get('seatId')
     # print(seatId)
     user_object = OnlineUser.objects.filter(userSeat=seatId).first()
     if not user_object:

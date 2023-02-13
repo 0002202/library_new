@@ -1,0 +1,25 @@
+.seat{
+    cursor: pointer;
+    user-select: none;
+    display: inline;
+    width: 40px;
+    height: 35px;
+    float: left;
+    padding: 0;
+    margin: 6px 0 10px 1px;
+    border: 1px solid;
+}
+.seat-order{
+    color: white;
+    background-color: #d58512;
+}
+
+.time-item{
+    float: right;
+    text-align: center;
+}
+span{
+    float: left;
+    padding-left: 9%;
+}
+

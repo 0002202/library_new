@@ -15,16 +15,17 @@ Including another URLconf
 """
 # from django.contrib import manager
 from django.urls import path, include
-from user.views import show_index, show_seat, show_login, show_information, logout, select_seat, show_success
+from user.views import show_index, show_seat, show_login, show_information, logout, select_seat, show_success, deduct
 
 urlpatterns = [
     # path('manager/', manager.site.urls),
     path('', show_index, name="show_index"),
     path('show_seat/', show_seat, name="show_seat"),
     path('information/', show_information, name="show_information"),
-    path('select_seat/', select_seat, name='select_seat'),
+    path('select_seat/<seatType>/', select_seat),
     path('login/', show_login, name="show_login"),
     path('logout/', logout, name="show_logout"),
+    path('deduct/', deduct),
 
     path("sign_success/", show_success),
     # 专用于座位数据查询

@@ -7,7 +7,8 @@ $(function (){
 function timeIntDiff(){
     var order_time = $('#countdown').text();
     // 必须满足这样的格式'2021/2/22 00:00:00'
-    return  order_time.substring(0, 4) +'/'+order_time.substring(5, 6)+'/'+order_time.substring(7, 8)+'/'+order_time.substring(10, 15) +':00';
+    return  order_time.substring(0, 4) +'/'+order_time.substring(5, 6)+'/'+order_time.substring(7, 8)+'/'+
+        order_time.substring(10, 18) +':00';
 }
 
 function count(order_time) {
@@ -25,6 +26,17 @@ function count(order_time) {
     $('#hour_show').text(hours);
     $('#minute_show').text(minutes);
     $("#second_show").text(seconds);
+    var time_leave = $('#hour_show').text();
+
+    if (time_leave === '12'){
+        // 释放座位
+        EventReleSeat();
+    }
+}
+
+function EventReleSeat() {
+    // 释放座位
+
 }
 
 function leaveLibrary(){

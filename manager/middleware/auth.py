@@ -17,7 +17,7 @@ class ManagerLogin(MiddlewareMixin):
         manager_info = request.session.get('manager_name')
         user_info = request.session.get('user_name')
         if user_info and not manager_info:
-            UserCheckUrl = ['/', '/select_seat/', '/getSeat/info/', '/getSeat/lock/', '/getSeat/status_update/',
+            UserCheckUrl = ['/', '/deduct/', '/select_seat/zxs/', '/select_seat/yds/', '/select_seat/xxs/', '/getSeat/info/', '/getSeat/lock/', '/getSeat/status_update/',
                             '/getSeat/seat_cancel/', '/getSeat/seat_save/', '/getSeat/leave/', '/sign_success/']
             if request.path_info in UserCheckUrl:
                 return

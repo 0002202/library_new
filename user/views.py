@@ -3,6 +3,9 @@ from django import forms
 from django.http import JsonResponse, HttpResponse
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
+from manager.models import BlackUser
 from seat.models import Seat
 from user.models import User, OnlineUser
 from manager.models import Information
@@ -16,6 +19,7 @@ from user.utils.encrypt import md5
 
 
 def show_index(request):
+    global user_seatId
     if request.method == 'GET':
         try:
             user_seatId = request.session.get('user_seat').get('seatId')
@@ -27,6 +31,7 @@ def show_index(request):
                 get('userName')
             title = '注销'
             countdown = OnlineUser.objects.filter(userSeat=user_seatId).values('userTime')[0].get('userTime')
+            print(countdown)
             return render(request, 'user/sign_success.html', {
                 'countdown': countdown,
                 'userName': userName,
@@ -73,46 +78,67 @@ def show_seat(request):
 
 
 # 进行选择座位
-def select_seat(request):
+def select_seat(request, seatType):
     if request.method == 'GET':
+        # 判断用户是否存在与黑名单中
         try:
             userName = User.objects.filter(userId=request.session.get('user_name').get('userId')).values('userName')[0]. \
                 get('userName')
             title = '注销'
+            userId = request.session.get('user_name').get('userId')
+            if BlackUser.objects.filter(userId=userId).first():
+                cancelTime = BlackUser.objects.filter(userId=userId).values('cancelTime')[0].get('cancelTime')
+                return HttpResponse("<h3 style='color: red;'>您已被系统拉黑，如有问题可联系管理员！</h3>您的解除时间为：%s" % cancelTime)
         except AttributeError:
             userName = '登录'
             title = '登录'
-        seatType = ['自习区', '阅读区', '休闲区']
         try:
             # 判断用户是否已经预约座位，若用户已经预约则不对用户显示选作页面，显示签到页面
             user_is_order = request.session.get('user_seat').get('is_order')
             user_seatId = request.session.get('user_seat').get('seatId')
             try:
                 user_is_already = request.session.get('user_already').get('is_already')
+                print(user_is_already)
             except:
                 user_is_already = None
             user_userTime = OnlineUser.objects.filter(userSeat=user_seatId).values('userTime')[0].get('userTime')
-            if user_is_order and not user_is_already:
+            if user_is_already:
+                print("已完成签到")
+                user_userTime = OnlineUser.objects.filter(userSeat=user_seatId).values('userTime')[0].get('userTime')
+                return render(request, 'user/sign_success.html', {
+                    'countdown': user_userTime,
+                    'userName': userName,
+                    'title': title
+                })
+            if user_is_order:
                 # 返回签到页面
+                print("已完成预约")
                 return render(request, 'user/sign_in.html', {
                     'countdown': user_userTime,
                     'seatId': user_seatId,
                     'userName': userName,
                     'title': title,
                 })
-            elif user_is_order and user_is_already:
-                countdown = OnlineUser.objects.filter(userSeat=user_seatId).values('userTime')[0].get('userTime')
-                return render(request, 'user/sign_success.html', {
-                    'countdown': countdown,
-                    'userName': userName,
-                    'title': title
-                })
         except:
-            return render(request, 'seat/select_seat.html', {
-                'seatType': seatType,
-                'userName': userName,
-                'title': title,
-            })
+            if seatType == 'zxs':
+                # 展示自习室相关的页面
+                return render(request, 'seat/select_seat_z.html', {
+                    'userName': userName,
+                    'title': title,
+                })
+            elif seatType == 'yds':
+                # 展示阅读室相关的内容
+                return render(request, 'seat/select_seat_y.html', {
+                    'userName': userName,
+                    'title': title,
+                })
+            else:
+                # 展示休闲室的内容
+                return render(request, 'seat/select_seat_x.html', {
+                    'userName': userName,
+                    'title': title,
+                })
+        return HttpResponse("数据请求错误")
 
 
 # 显示系统公告
@@ -256,6 +282,41 @@ def show_success(request):
         return HttpResponse("数据错误！！！")
 
 
+# 用户未按时签到
+@csrf_exempt
+def deduct(request):
+    if request.method == 'POST':
+        seatId = request.POST.get('seatId')
+        object_info = OnlineUser.objects.filter(userSeat=seatId).first()
+        userId = request.session.get('user_name').get('userId')
+        nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        now_userIntegral = User.objects.filter(userId=userId).values('userIntegral')[0].get('userIntegral')
+        if now_userIntegral == 1:
+            # 加入黑名单，cancelTime默认为七天后
+            cancelTime = datetime.datetime.now()+datetime.timedelta(days=7)
+            BlackUser(userId=userId, createTime=nowTime, cancelTime=cancelTime.strftime('%Y-%m-%d %H:%M:%S')).save()
+        if object_info:
+            User.objects.filter(userId=userId).update(userIntegral=now_userIntegral-1)
+            OnlineUser.objects.filter(userSeat=seatId).update(userStatus=1, userTime=nowTime, userSeat="未预约座位")
+            Seat.objects.filter(seatId=seatId).update(seatStatus=1)
+            request.session['user_seat'] = {
+                'seatId': None,
+                'is_order': False
+            }
+            request.session['user_already'] = {
+                'is_already': False
+            }
+            return JsonResponse({
+                'status': True,
+                'result': '处理成功'
+            })
+        return JsonResponse({
+            'status': False,
+            'result': '数据错误！'
+        })
+    return HttpResponse("404")
+
+
 # 用户正常离馆
 def leave(request):
     if request.method == 'GET':
@@ -268,6 +329,9 @@ def leave(request):
         request.session['user_seat'] = {
             'seatId': None,
             'is_order': False
+        }
+        request.session['user_already'] = {
+            'is_already': False
         }
         userName = User.objects.filter(userId=request.session.get('user_name').get('userId')).values('userName')[0]. \
             get('userName')
@@ -293,3 +357,5 @@ def logout(request):
             pass
         request.session.flush()
         return redirect('/login')
+
+
