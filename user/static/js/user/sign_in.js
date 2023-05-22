@@ -1,6 +1,6 @@
 $(function(){
 
-    bindBtnConfirmSeatEvent();  // 确认签到
+    // bindBtnConfirmSeatEvent();  // 确认签到
     bindBtnCancelEvent();       // 取消预约
     count(timeIntDiff());                   //先执行一次这个函数  防止页面刷新出现空白
     CountDown();

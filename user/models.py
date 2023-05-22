@@ -19,4 +19,13 @@ class OnlineUser(models.Model):
         (3, '已就坐'),
     )
     userStatus = models.SmallIntegerField(verbose_name="用户状态", choices=gender_choices, default=1)
-
+    # orderTime_choices = (
+    #     (1, '08:00~10:00'),
+    #     (2, '10:00~12:00'),
+    #     (3, '13:00~15:00'),
+    #     (4, '15:00~17:00'),
+    #     (5, '17:00~19:00'),
+    #     (6, '19:00~21:00'),
+    # )
+    # # 只有用户选择了需要预约的座位时，才会存储预约时间
+    # userOrderTime = models.CharField(verbose_name="预约时间", choices=orderTime_choices, max_length=64, default=None)

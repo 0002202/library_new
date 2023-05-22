@@ -1,10 +1,11 @@
-import datetime
+from datetime import timedelta, datetime
+import random
 from django import forms
 from django.http import JsonResponse, HttpResponse
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-
+from school_Item.settings import BASE_DIR
 from manager.models import BlackUser
 from seat.models import Seat
 from user.models import User, OnlineUser
@@ -59,9 +60,10 @@ def show_seat(request):
         # 返回座位数量
         """seatStatus：1,2,3分别是未预约、已预约、已就坐"""
         """seatType：1,2,3分别是自习区、阅读区、休闲区"""
-        study = Seat.objects.filter(seatType='1', seatStatus='1').count()
-        standard = Seat.objects.filter(seatType='2', seatStatus='1').count()
-        leisure = Seat.objects.filter(seatType='3', seatStatus='1').count()
+        """seatOrder：2表示不需要预约，若为1则表示需要管理员进行控制预约"""
+        study = Seat.objects.filter(seatType='1', seatStatus='1', seatOrder='2').count()
+        standard = Seat.objects.filter(seatType='2', seatStatus='1', seatOrder='2').count()
+        leisure = Seat.objects.filter(seatType='3', seatStatus='1', seatOrder='2').count()
         try:
             userName = User.objects.filter(userId=request.session.get('user_name').get('userId')).values('userName')[0]. \
                 get('userName')
@@ -93,7 +95,7 @@ def select_seat(request, seatType):
             userName = '登录'
             title = '登录'
         try:
-            # 判断用户是否已经预约座位，若用户已经预约则不对用户显示选作页面，显示签到页面
+            # 判断用户是否已经预约座位，若用户已经预约则不对用户显示选作页面，显示签到页面，包括用户进行扫码再签到的信息判断
             user_is_order = request.session.get('user_seat').get('is_order')
             user_seatId = request.session.get('user_seat').get('seatId')
             try:
@@ -207,6 +209,7 @@ class UserLogIn(BootstrapModelForm):
         return md5(pwd)
 
 
+@csrf_exempt
 # 用户登录
 def show_login(request):
     if request.method == 'GET':
@@ -241,9 +244,23 @@ def show_login(request):
                 'is_login': True
             }
             # 还需要将用户记录到在线用户表中
-            nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            data = OnlineUser(userId=formLogIn.cleaned_data.get('login_userId'), userTime=nowTime)
-            data.save()
+            nowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            if not OnlineUser.objects.filter(userId=formLogIn.cleaned_data.get('login_userId')).first():
+                # 若用户不在表中，则将用户添加入库
+                OnlineUser(userId=formLogIn.cleaned_data.get('login_userId'), userTime=nowTime).save()
+            # data = OnlineUser(userId=formLogIn.cleaned_data.get('login_userId'), userTime=nowTime)
+            # data.save()
+            else:
+                seatId = OnlineUser.objects.filter(userId=formLogIn.cleaned_data.get('login_userId')).values('userSeat')[0].get('userSeat')
+                if seatId != '未预约座位':
+                    request.session['user_seat'] = {
+                    'seatId': seatId,
+                    'is_order': True
+                }
+                    request.session['user_already'] = {
+                    'is_already': True
+                }
+            OnlineUser.objects.filter(userId=formLogIn.cleaned_data.get('login_userId')).update(userTime=nowTime)   # 只用更新时间
             userName = User.objects.filter(userId=formLogIn.cleaned_data.get('login_userId')).values('userName')[0]. \
                 get('userName')
             queryData = Information.objects.filter().order_by("-createTime")
@@ -266,20 +283,44 @@ def show_login(request):
 
 # 用户签到成功后，即展示签到成功页面
 def show_success(request):
-    if request.session.get('user_seat').get('is_order'):
-        userName = User.objects.filter(userId=request.session.get('user_name').get('userId')).values('userName')[0]. \
-            get('userName')
-        title = '注销'
+    # 判断用户是否扫码成功，并要求扫时间内的二维码，若扫码获取的时间未在规定时间内则将会失败
+    create_qrcode_time = request.GET.get('create_qrcode_time')  # 二维码的创建时间
+    now_time = datetime.now()
+    time_format = '%Y-%m-%d %H:%M:%S'
+    time_obj = datetime.strptime(create_qrcode_time, time_format)
+    gap_time = now_time - time_obj
+    ten_minutes = timedelta(minutes=10)
+    if gap_time < ten_minutes:
+        # 二维码十分钟就会失效
         userId = request.session.get('user_name').get('userId')
-        countdown = OnlineUser.objects.filter(userId=userId).values('userTime')[0].get('userTime')
-        # 才会显示签到成功页面
-        return render(request, 'user/sign_success.html', {
-            'countdown': countdown,
-            'userName': userName,
-            'title': title
-        })
+        print(userId)
+        if OnlineUser.objects.filter(userId=userId).values('userStatus')[0].get('userStatus') == '2':
+            # 已经预约
+            userName = User.objects.filter(userId=request.session.get('user_name').get('userId')).values('userName')[0]. \
+                get('userName')
+            title = '注销'
+            # userId = request.session.get('user_name').get('userId')
+            countdown = OnlineUser.objects.filter(userId=userId).values('userTime')[0].get('userTime')
+            seatId = OnlineUser.objects.filter(userId=userId).values('userSeat')[0].get('userSeat')
+            # 改变用户的session状态
+            request.session['user_already'] = {
+                'is_already': True
+            }
+            # 修改数据库中的信息
+            OnlineUser.objects.filter(userId=userId).update(userStatus=3)
+            Seat.objects.filter(seatId=seatId).update(seatStatus=3)
+            print("=========")
+            # 才会显示签到成功页面
+            return render(request, 'user/sign_success.html', {
+                'countdown': countdown,
+                'seatId': seatId,
+                'userName': userName,
+                'title': title
+            })
+        else:
+            return redirect('/show_seat/')
     else:
-        return HttpResponse("数据错误！！！")
+        return HttpResponse("<h1 style='color: red'>该二维码已过期！！！</h1>")
 
 
 # 用户未按时签到
@@ -289,11 +330,11 @@ def deduct(request):
         seatId = request.POST.get('seatId')
         object_info = OnlineUser.objects.filter(userSeat=seatId).first()
         userId = request.session.get('user_name').get('userId')
-        nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        nowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         now_userIntegral = User.objects.filter(userId=userId).values('userIntegral')[0].get('userIntegral')
         if now_userIntegral == 1:
             # 加入黑名单，cancelTime默认为七天后
-            cancelTime = datetime.datetime.now()+datetime.timedelta(days=7)
+            cancelTime = datetime.now()+timedelta(days=7)
             BlackUser(userId=userId, createTime=nowTime, cancelTime=cancelTime.strftime('%Y-%m-%d %H:%M:%S')).save()
         if object_info:
             User.objects.filter(userId=userId).update(userIntegral=now_userIntegral-1)
@@ -322,7 +363,7 @@ def leave(request):
     if request.method == 'GET':
         userId = request.session.get('user_name').get('userId')
         seatId = OnlineUser.objects.filter(userId=userId).values('userSeat')[0].get('userSeat')
-        nowTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        nowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         # 释放座位，修改座位状态
         Seat.objects.filter(seatId=seatId).update(seatStatus=1)
         OnlineUser.objects.filter(userId=userId).update(userStatus=1, userTime=nowTime, userSeat="未预约座位")

@@ -2,6 +2,7 @@ $(function (){
     setInterval(() =>count(timeIntDiff()), 1000);
     timeIntDiff();
     leaveLibrary();     // 用户离馆
+    showSuccessInfo();  // 跳出成功消息
 })
 
 function timeIntDiff(){
@@ -31,12 +32,31 @@ function count(order_time) {
     if (time_leave === '12'){
         // 释放座位
         EventReleSeat();
+        // 扣除积分
+        var seatId = $(".seatId").text()
+        // 向后端发起扣分请求
+        $.ajax({
+            url: '/deduct/',
+            type: 'post',
+            dataType: 'JSON',
+            data: {
+                'seatId': seatId,
+            },
+            success: function (res){
+                if(res.status){
+                    // 跳转到主页
+                    $(window).attr('location','/');
+                }else {
+                    alert(res.result);
+                }
+            }
+        })
     }
 }
 
 function EventReleSeat() {
     // 释放座位
-
+    $(window).attr('location','/getSeat/leave/');   // 执行leave函数进行离馆
 }
 
 function leaveLibrary(){
@@ -47,4 +67,11 @@ function leaveLibrary(){
             $(window).attr('location','/getSeat/leave/');
         })
     })
+}
+
+function showSuccessInfo(){
+    $('#myModal').modal('show');
+    $('.leave').click(function(){
+        $('#myModal').model('hide');
+    });
 }

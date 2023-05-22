@@ -63,6 +63,22 @@ div{
 .select-info{
     text-align: center;
 }
-.seat-id{
+.seat-manager-order{
+    color: white;
+    background-color:#4CAF50;
+}
 
+.select-time{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.select-time > *:first-child {
+    flex-grow: 1;
+}
+.select-time > *:nth-child(2) {
+    flex-grow: 2;
+}
+.select-time > *:last-child {
+    flex-grow: 1;
 }

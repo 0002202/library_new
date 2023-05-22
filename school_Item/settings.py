@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-z#(@pnyf71cv9by%j%uibl_182!%(y)3h06fqcsdp^z(^uhjov
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.nbdj.xyz', 'nbdj.xyz', '127.0.0.1']
 
 
 # Application definition
@@ -91,8 +91,8 @@ DATABASES = {
         'NAME': 'library_new',
         'USER': 'admin',
         'PASSWORD': 'nbdj.xyz',
-        'HOST': '127.0.0.1',     # 数据库所在的IP地址，为空表示127.0.0.1
-        'POST': '3306',     # 连接端口号，为空表示默认端口号3306
+        'HOST': '',     # 数据库所在的IP地址，为空表示127.0.0.1
+        'POST': '',     # 连接端口号，为空表示默认端口号3306
     }
 }
 # Password validation

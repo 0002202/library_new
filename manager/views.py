@@ -3,7 +3,7 @@ import datetime
 from django import forms
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-
+from django.views.decorators.csrf import csrf_exempt
 from user.utils.encrypt import md5
 from manager.models import AdminUser, Information, BlackUser
 from seat.models import Seat
@@ -30,6 +30,7 @@ class ManagerModelForm(BootstrapModelForm):
 
 
 # 管理员登录
+@csrf_exempt
 def admin_login(request):
     if request.method == "GET":
         form = ManagerModelForm()
@@ -431,3 +432,8 @@ def admin_black_del(request):
         return JsonResponse({'status': False, 'result': '数据不存在，删除失败'})
     BlackUser.objects.filter(userId=userId).delete()  # 删除该座位数据
     return JsonResponse({'status': True, 'result': '删除成功!'})
+
+
+# 展示二维码
+def admin_qr_code(request):
+    return render(request, 'admin/Qrcode.html')

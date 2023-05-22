@@ -10,7 +10,7 @@
     <script src="{% static 'plugins/jquery/dist/jquery.js' %}"></script>
     <script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
     <link href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
-
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
     {% block css %} {% endblock %}
 </head>
 
@@ -28,7 +28,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{% url 'show_index' %}">我的图书馆 <span class="sr-only">(current)</span></a></li>
                     <li><a href="{% url 'show_seat' %}">在线选座</a></li>
-                    <li><a href="{% url 'show_seat' %}">预约选座</a></li>
+                    <!-- <li><a href="{% url 'show_seat' %}">预约选座</a></li> -->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'show_information' %}">信息中心</a></li>

@@ -693,13 +693,13 @@
         </div>
     <div class="col-sm-2" style=" padding: 0;">
             <div style="height: 100px; width: 50px; float: left;">
-                <div class="seat" id="z4017"><p class="seatId"></p></div>
-                <div class="seat" id="z4018"><p class="seatId"></p></div>
+                <div class="seat" id="y4017"><p class="seatId"></p></div>
+                <div class="seat" id="y4018"><p class="seatId"></p></div>
             </div>
                 <div class="desk"></div>
             <div style="height: 100px; width: 50px; float: left; margin-left: 8px">
-                <div class="seat" id="z4019"><p class="seatId"></p></div>
-                <div class="seat" id="z4020"><p class="seatId"></p></div>
+                <div class="seat" id="y4019"><p class="seatId"></p></div>
+                <div class="seat" id="y4020"><p class="seatId"></p></div>
             </div>
         </div>
             <!--过道-->
@@ -1114,6 +1114,46 @@
                 </div>
             </div>
         </div>
+
+     <!--模态框展示需要预约的座位信息-->
+     <div class="modal fade" id="order-myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                     &times;
+                 </button>
+                 <h4 class="modal-title" id="myModalLabel">
+                     选择所需要预约的时间
+                 </h4>
+             </div>
+             <div class="modal-body">
+                 <div class="form-group">
+                     <div class="alert alert-info" role="alert">请在选择需要预约的时间</div>
+                 </div>
+
+                <div class="select-time">
+                    <button id="time1" type="button" class="btn btn-default">08:00~10:00</button>
+                    <button id="time2" type="button" class="btn btn-default">10:00~12:00</button>
+                    <button id="time3" type="button" class="btn btn-default">13:00~15:00</button>
+                  </div>
+                  <div class="select-time">
+                    <button id="time4" type="button" class="btn btn-default">15:00~17:00</button>
+                    <button id="time5" type="button" class="btn btn-default">17:00~19:00</button>
+                    <button id="time6" type="button" class="btn btn-default">19:00~21:00</button>
+                  </div>
+                  <div class="col-sm-4">
+                      <h3>您选择的时间为：<i class="order-time"></i></h3>
+                  </div>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-primary" id="BtnConfirmOrder">确认预约
+                 </button>
+             </div>
+         </div>
+     </div>
+ </div>
 {% endblock %}
 {% block js %}
     <script src="{% static 'js/seat/select_seat.js' %}"></script>

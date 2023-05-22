@@ -4,7 +4,7 @@ from django.urls import path
 from manager.views import admin_login, admin_logout, admin_index, admin_seat, admin_information, admin_relationship, admin_black, \
     admin_seat_save, admin_seat_del, admin_seat_info, admin_seat_edit, admin_relationship_edit, admin_relationship_info,\
     admin_information_info, admin_information_save, admin_information_del, admin_information_edit, admin_black_save,\
-    admin_black_info, admin_black_del, admin_black_update
+    admin_black_info, admin_black_del, admin_black_update, admin_qr_code
 urlpatterns = [
     # 将管理员所需要的页面进行展示
     path('login/', admin_login, name="show_admin_login"),
@@ -37,6 +37,7 @@ urlpatterns = [
     path('black_update/', admin_black_update),
     path('black_del/', admin_black_del),
 
-
+    # 展示二维码
+    path('qr_code/', admin_qr_code, name="show_admin_qr_code"),
 
 ]

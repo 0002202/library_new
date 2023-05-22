@@ -8,6 +8,7 @@ $(function(){
     ShowSeat();              // 座位的展示
     bindClickPostEvent()     // 保存座位
     CancelEventModel();
+    // seatManagerOrder();      // 处理管理员所预约的座位
     // setInterval(bindFloorClickEvent,5000);       // 页面定时刷新数据
 })
 
@@ -22,12 +23,10 @@ function FirstDataGet() {
             'floor': FLOOR_ID,
         },
         success: function (res){
-            console.log(res.result[0]);
-
-                for(let i = 0; i < res.result.length; i++){
-                    bindGenerateSeat(res.result[i]);     // 填写座位数据并生成座位
-                }
-            },
+            for(let i = 0; i < res.result.length; i++){
+                bindGenerateSeat(res.result[i]);     // 填写座位数据并生成座位
+            }
+        },
         error: function (){
             console.log('获取失败！！！');
         }
@@ -92,11 +91,14 @@ function bindGenerateSeat(data) {
     // 判断座位数据，进行渲染座位
     // console.log(data['seatPower']);
     if (data['seatPower'] === 1){
-        $('#'+seatId).addClass('seat-power')
+        $('#'+seatId).addClass('seat-power');
     }if(data['seatStatus'] === 2){
-        $('#'+seatId).addClass('seat-order seat-disable')
+        $('#'+seatId).addClass('seat-order seat-disable');
     }if(data['seatStatus'] === 3){
-        $('#'+seatId).addClass('seat-already seat-disable')
+        $('#'+seatId).addClass('seat-already seat-disable');
+    }if(data['seatOrder'] === 1){                           // 需要满足管理员设置当前座位需要预约才能够进行选择
+        // $('#'+seatId).addClass('seat-manager-order');
+        // $('#'+seatId).addClass('seat-order seat-disable');
     }
 
 }
@@ -136,3 +138,14 @@ function CancelEventModel(){
     })
 }
 
+function seatManagerOrder(){
+    $(document).on('click', '.seat-manager-order', function(){
+        $('#order-myModal').modal('show');
+        
+    })
+    $('.btn-default').click(function(){
+        var order_time_id = $(this).attr('id');
+        var order_time = $('#'+order_time_id).text()
+        $('.order-time').text(order_time);
+    })
+}

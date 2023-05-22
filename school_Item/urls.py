@@ -26,7 +26,6 @@ urlpatterns = [
     path('login/', show_login, name="show_login"),
     path('logout/', logout, name="show_logout"),
     path('deduct/', deduct),
-
     path("sign_success/", show_success),
     # 专用于座位数据查询
     path('getSeat/', include('seat.urls')),
