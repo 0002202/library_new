@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>签到</title>
+</head>
+<body>
+
+    <img src="{% static 'img/qrcode/qrcode.png' %}" alt="二维码" style="padding-left: 400px">
+
+</body>
+<script type="text/javascript">
+    setTimeout(function(){
+        location.reload();
+    }, 300000); // 600000毫秒 = 10分钟
+</script>
+
+</html>
